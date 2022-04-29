@@ -1,3 +1,4 @@
+const commander = require("commander");
 const axios = require("axios");
 const Web3 = require("web3");
 const web3 = new Web3(
@@ -5,11 +6,19 @@ const web3 = new Web3(
     "https://mainnet.infura.io/v3/7131a8712268487cafdfa039419bc8bb"
   )
 );
-
 const API_KEY = "ckey_fb7e3a0e5abd46ee84c2b6a9b15";
 const chain_id = 1; // Ethererum
 // const chain_id = 56; // Binance
-var wallet_address = "0x16349A1d5664D7889F57A02Cf1f53188bc4576f7";
+
+// var wallet_address = "0x16349A1d5664D7889F57A02Cf1f53188bc4576f7";
+var wallet_address;
+
+commander
+  .option("--wallet <value>", "Overwriting value.", "Default")
+  .parse(process.argv);
+
+const options = commander.opts();
+wallet_address = options.wallet;
 
 var wallet_info = {
   balance: "",
